@@ -1,0 +1,72 @@
+.footer-container {
+    display: flex;
+    width: 98.4%;
+    height: 8.75rem;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #005f20;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0 1rem 0 1rem;
+}
+
+.footer-list > li {
+    list-style-type: none;
+    margin-right: 1rem;
+}
+
+.footer-list > li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-list > li a:hover {
+    color: #0077b5;
+    transform: scale(1.2);
+}
+
+.footer-container > p a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-container > p a:hover {
+    color: #0077b5;
+    transform: scale(1.2);
+}
+
+/* Estilizando a seção de ícones */
+.social-media-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem; /* Espaçamento entre os ícones */
+}
+
+/* Estilos dos ícones */
+.social-media-icons a {
+    color: #fff; /* Cor inicial dos ícones */
+    font-size: 2rem; /* Tamanho dos ícones */
+    transition: color 0.3s ease, transform 0.3s ease; /* Animação suave ao passar o mouse */
+}
+
+.social-media-icons a:hover {
+    color: #0077b5; /* Muda a cor ao passar o mouse (LinkedIn blue) */
+    transform: scale(1.2); /* Aumenta o ícone em 20% ao passar o mouse */
+}
+
+/* Cor personalizada para cada rede social */
+.social-media-icons a:nth-child(1):hover { /* GitHub */
+    color: #6e5494;
+}
+
+.social-media-icons a:nth-child(2):hover { /* LinkedIn */
+    color: #0077b5;
+}
+
+.social-media-icons a:nth-child(3):hover { /* Instagram */
+    color: #e4405f;
+}
