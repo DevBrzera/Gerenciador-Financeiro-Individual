@@ -13,18 +13,19 @@ class EntradaModel {
   }
 
   create(newEntrada) {
-    const sql = "INSERT INTO Entradas (Data, Descricao, Categoria, Dinheiro) VALUES (?,?,?,?)";
+    const sql = "INSERT INTO Entradas (Data, Descricao, Categoria, Dinheiro, ID_Usuario) VALUES (?,?,?,?,?)";
     return this.executeSQL(sql, [
-        newEntrada.Data,
-        newEntrada.Descricao,
-        newEntrada.Categoria,
-        newEntrada.Dinheiro,
-      ]);
+      newEntrada.Data,
+      newEntrada.Descricao,
+      newEntrada.Categoria,
+      newEntrada.Dinheiro,
+      newEntrada.ID_Usuario,
+    ]);
   }
 
-  readList() {
-    const sql = "SELECT * FROM Entradas";
-    return this.executeSQL(sql);
+  readList(userId) {
+    const sql = "SELECT * FROM Entradas WHERE ID_Usuario = ?";
+    return this.executeSQL(sql, [userId]);
   }
 
   read(id) {
@@ -47,7 +48,6 @@ class EntradaModel {
     const sql = "DELETE FROM Entradas WHERE ID = ?";
     return this.executeSQL(sql, [id]);
   }
-
 }
 
 module.exports = new EntradaModel();

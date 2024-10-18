@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "./login/authContext";
 import "../styles/home.css";
 
 export default function Home() {
+  const { user } = useAuth();
   const [entradas, setEntradas] = useState([]);
   const [saidas, setSaidas] = useState([]);
   const [novaEntrada, setNovaEntrada] = useState({
@@ -18,19 +20,23 @@ export default function Home() {
     Dinheiro: "",
   });
   const [saldo, setSaldo] = useState(0);
-  const [showModal, setShowModal] = useState(false); // Estado para exibir ou ocultar o modal
-  const [modalType, setModalType] = useState("entrada"); // Tipo de modal (entrada ou saída)
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState("entrada");
 
   useEffect(() => {
     async function fetchEntradasSaidas() {
+      if (!user) return;
+
       try {
         const entradasResponse = await axios.get(
-          "http://localhost:3000/entradas"
+          `http://localhost:3000/entradas/${user.ID}`
         );
         const entradasData = entradasResponse.data;
         setEntradas(entradasData);
 
-        const saidasResponse = await axios.get("http://localhost:3000/saidas");
+        const saidasResponse = await axios.get(
+          `http://localhost:3000/saidas/${user.ID}`
+        );
         const saidasData = saidasResponse.data;
         setSaidas(saidasData);
 
@@ -47,15 +53,20 @@ export default function Home() {
         console.error("Erro ao buscar entradas e saídas:", error);
       }
     }
+
     fetchEntradasSaidas();
-  }, []);
+  }, [user]);
 
   const handleSubmitEntrada = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/entradas-create", novaEntrada);
+      await axios.post(`http://localhost:3000/entradas/${user.ID}/create`, {
+        ...novaEntrada,
+      });
       setNovaEntrada({ Data: "", Descricao: "", Categoria: "", Dinheiro: "" });
-      const response = await axios.get("http://localhost:3000/entradas");
+      const response = await axios.get(
+        `http://localhost:3000/entradas/${user.ID}`
+      );
       const entradasData = response.data;
       setEntradas(entradasData);
       const saldoAtual = entradasData.reduce(
@@ -76,9 +87,13 @@ export default function Home() {
   const handleSubmitSaida = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/saidas-create", novaSaida);
-      setNovaSaida({ Data: "", Descricao: "", Categoria: "", Dinheiro: "" });
-      const response = await axios.get("http://localhost:3000/saidas");
+      await axios.post(`http://localhost:3000/saidas/${user.ID}/create`, {
+        ...novaSaida,
+      });
+      setNovaSaida({ Data: "", Descricao: "", Categoria: "", Dinheiro: "" }); 
+      const response = await axios.get(
+        `http://localhost:3000/saidas/${user.ID}`
+      );
       const saidasData = response.data;
       setSaidas(saidasData);
       const saldoEntradas = entradas.reduce(
@@ -183,7 +198,10 @@ export default function Home() {
                   placeholder="Descrição"
                   value={novaSaida.Descricao}
                   onChange={(e) =>
-                    setNovaSaida({ ...novaSaida, Descricao: e.target.value })
+                    setNovaSaida({
+                      ...novaSaida,
+                      Descricao: e.target.value,
+                    })
                   }
                   required
                 />
@@ -192,7 +210,10 @@ export default function Home() {
                   placeholder="Categoria"
                   value={novaSaida.Categoria}
                   onChange={(e) =>
-                    setNovaSaida({ ...novaSaida, Categoria: e.target.value })
+                    setNovaSaida({
+                      ...novaSaida,
+                      Categoria: e.target.value,
+                    })
                   }
                   required
                 />
@@ -244,12 +265,7 @@ export default function Home() {
               ))}
             </tbody>
           </table>
-          <button
-            className="button-create-entrada"
-            onClick={() => openModal("entrada")}
-          >
-            Nova Entrada
-          </button>
+          <button className="button-create-entrada" onClick={() => openModal("entrada")}>Cadastrar Entrada</button>
         </div>
 
         {/* Lista de saídas */}
@@ -280,12 +296,7 @@ export default function Home() {
               ))}
             </tbody>
           </table>
-          <button
-            className="button-create-saida"
-            onClick={() => openModal("saida")}
-          >
-            Nova Saída
-          </button>
+          <button className="button-create-saida" onClick={() => openModal("saida")}>Cadastrar Saída</button>
         </div>
       </div>
     </div>

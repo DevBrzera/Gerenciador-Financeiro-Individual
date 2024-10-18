@@ -13,18 +13,19 @@ class SaidaModel {
   }
 
   create(newSaida) {
-    const sql = "INSERT INTO Saidas (Data, Descricao, Categoria, Dinheiro) VALUES (?,?,?,?)";
+    const sql = "INSERT INTO Saidas (Data, Descricao, Categoria, Dinheiro, ID_Usuario) VALUES (?,?,?,?,?)";
     return this.executeSQL(sql, [
         newSaida.Data,
         newSaida.Descricao,
         newSaida.Categoria,
         newSaida.Dinheiro,
+        newSaida.ID_Usuario,
       ]);
   }
 
-  readList() {
-    const sql = "SELECT * FROM Saidas";
-    return this.executeSQL(sql);
+  readList(userId) {
+    const sql = "SELECT * FROM Saidas WHERE ID_Usuario = ?";
+    return this.executeSQL(sql, [userId]);
   }
 
   read(id) {

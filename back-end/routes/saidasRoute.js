@@ -2,13 +2,12 @@ const Router = require('express').Router;
 const router = Router();
 const saidasController = require('../controllers/saidasController');
 
-router.get('/saidas', saidasController.readList);
-router.get('/saidas/:id', saidasController.read);
+router.get('/saidas/:userId', saidasController.readList);
 
-router.post('/saidas-create', saidasController.create);
+router.post('/saidas/:userId/create', saidasController.create);
 
-router.put('/saidas-update/:id', saidasController.update);
+router.put('/saidas/:userId/update/:id', saidasController.update);
 
-router.delete('/saidas-delete/:id', saidasController.delete);
+router.delete('/saidas/:userId/delete/:id', saidasController.delete);
 
 module.exports = router;
