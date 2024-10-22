@@ -1,18 +1,20 @@
+/* Estilo padrão para telas maiores */
 .navbar-container {
     width: 100%;
     height: 5.9375rem;
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #005f20;
+    padding: 0 45px;
+    position: relative; /* Remover o absolute para melhor controle em diferentes layouts */
 }
 
 .navbar-title {
     font-size: 2.5rem;
     color: #fff;
-    margin-left: 45px;
     font-weight: 600;
+    text-align: left;
 }
 
 .logout {
@@ -20,7 +22,6 @@
     color: #fff;
     text-decoration: none;
     cursor: pointer;
-    margin-right: 45px;
     transition: color 0.3s ease;
 }
 
@@ -28,3 +29,43 @@
     color: #d3d3d3;
 }
 
+/* Estilos para dispositivos menores (responsividade) */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        padding: 10px 20px;
+    }
+
+    .navbar-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .logout {
+        font-size: 1.6rem;
+        margin: 0;
+    }
+}
+
+/* Estilos para smartphones */
+@media (max-width: 480px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+    .navbar-title {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .logout {
+        font-size: 1.4rem;
+    }
+}

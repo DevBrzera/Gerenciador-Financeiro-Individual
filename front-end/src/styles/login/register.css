@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: #f8f9fa;
     width: 40.625rem;
-    height: 28.125rem;
+    height: 37.125rem;
     border-radius: 10px;
 }
 

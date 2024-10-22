@@ -12,9 +12,6 @@ export default function Footer() {
         <li>
           <a href="#">Termos & Condições</a>
         </li>
-        <li>
-          <a href="#">Politica de Privacidade</a>
-        </li>
       </ul>
       <p>
         Contato{" "}

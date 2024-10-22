@@ -1,10 +1,11 @@
 .login-form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: #f8f9fa;
     width: 40.625rem;
-    height: 28.125rem;
+    height: 37.125rem;
     border-radius: 10px;
 }
 

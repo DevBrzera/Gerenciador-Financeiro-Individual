@@ -1,19 +1,26 @@
 .footer-container {
     display: flex;
-    width: 98.4%;
-    height: 8.75rem;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: space-around; /* Permite melhor organização em dispositivos pequenos */
+    align-items: center; /* Centraliza os itens no rodapé */
+    width: 100%; /* Ajusta a largura para ocupar 100% do espaço */
+    height: 7.6rem; /* Permite que a altura se ajuste automaticamente */
     background-color: #005f20;
     color: #fff;
     font-size: 1.5rem;
     font-weight: 500;
-    padding: 0 1rem 0 1rem;
+    padding: 1rem; /* Adiciona padding ao redor do conteúdo */
+}
+
+/* Lista de links no rodapé */
+.footer-list {
+    display: flex;
+    justify-content: center; /* Centraliza a lista */
+    flex-wrap: wrap; /* Permite que os itens se movam para a linha seguinte em telas menores */
 }
 
 .footer-list > li {
     list-style-type: none;
-    margin-right: 1rem;
+    margin: 0 0.5rem; /* Espaçamento horizontal entre os itens */
 }
 
 .footer-list > li a {
@@ -27,23 +34,13 @@
     transform: scale(1.2);
 }
 
-.footer-container > p a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-container > p a:hover {
-    color: #0077b5;
-    transform: scale(1.2);
-}
-
 /* Estilizando a seção de ícones */
 .social-media-icons {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Centraliza os ícones */
     gap: 1rem; /* Espaçamento entre os ícones */
+    flex-wrap: wrap; /* Permite que os ícones se movam para a linha seguinte em telas menores */
 }
 
 /* Estilos dos ícones */
@@ -54,7 +51,6 @@
 }
 
 .social-media-icons a:hover {
-    color: #0077b5; /* Muda a cor ao passar o mouse (LinkedIn blue) */
     transform: scale(1.2); /* Aumenta o ícone em 20% ao passar o mouse */
 }
 
@@ -69,4 +65,38 @@
 
 .social-media-icons a:nth-child(3):hover { /* Instagram */
     color: #e4405f;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .footer-container {
+        height: auto;
+        flex-direction: column; /* Coloca os itens na vertical */
+        font-size: 1.3rem; /* Ajusta o tamanho da fonte para dispositivos menores */
+        padding: 0.5rem; /* Reduz o padding */
+    }
+
+    .footer-list > li {
+        margin: 0 0.3rem; /* Diminui a margem dos itens da lista */
+    }
+
+    .social-media-icons a {
+        font-size: 1.5rem; /* Diminui o tamanho dos ícones em dispositivos menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        height: auto;
+        font-size: 1.2rem; /* Diminui ainda mais o tamanho da fonte */
+        padding: 0.3rem; /* Reduz ainda mais o padding */
+    }
+
+    .footer-list > li {
+        margin: 0 0.2rem; /* Diminui a margem dos itens da lista */
+    }
+
+    .social-media-icons a {
+        font-size: 1.3rem; /* Diminui o tamanho dos ícones em dispositivos pequenos */
+    }
 }
